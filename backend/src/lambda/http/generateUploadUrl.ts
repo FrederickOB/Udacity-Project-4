@@ -9,7 +9,7 @@ import * as uuid from 'uuid'
 import {
   generateUploadUrl,
   updateAttachmentUrl
-} from '../../helpers/attachmentUtils'
+} from '../../dataAccess/attachmentUtils'
 
 const logger = createLogger('generateUploadUrl')
 
