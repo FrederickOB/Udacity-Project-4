@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import 'source-map-support/register'
 import * as middy from 'middy'
-import { cors } from 'middy/middlewares'
+import { cors, httpErrorHandler } from 'middy/middlewares'
 import { createLogger } from '../../utils/logger'
 import { CreateTodoRequest } from '../../requests/CreateTodoRequest'
 import { getUserId } from '../utils'
@@ -21,13 +21,13 @@ export const handler = middy(
     return {
       statusCode: 201,
       body: JSON.stringify({
-        newItem
+        item: newItem
       })
     }
   }
 )
 
-handler.use(
+handler.use(httpErrorHandler()).use(
   cors({
     credentials: true
   })
